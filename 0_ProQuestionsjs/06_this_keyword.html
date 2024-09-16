@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this keyword</title>
+</head>
+<body style="background-color: #212221; color: #fff;">
+
+    <h3>this keyword on DOM</h3>
+    <button id="button">Click me</button>
+    <br> <br>
+    <button id="button2">Click again</button>
+    
+</body>
+<script>
+// this keyword.
+// It depends on which environment is use for this keyword, mostly in interview ask browser env.
+
+// Classical (Regular) function.
+// function getThis(){
+//     console.log(this); // window
+// }
+
+// const obj = {
+//     getThis
+// }
+// getThis();
+// obj.getThis();
+
+
+// Arrow function.
+const getThis = () => {
+    console.log(this); // empty object
+};
+const obj = {
+    getThis,
+};
+// getThis(); // empty object
+// obj.getThis();  // empty object
+
+// Regular function vs Arrow fucntion on DOM.
+document.getElementById('button').addEventListener('click', function(){
+    console.log(this); // current context.
+})
+
+// Arrow function:
+document.getElementById('button2').addEventListener('click', () =>{
+    console.log(this);  // window
+})
+// therefore regular function must use while on DOM manipulation.
+
+// For class
+
+class Person {
+    constructor(name, age) {
+        this.name = name; // 'this' refers to the instance of the class
+        this.age = age;   // 'this' refers to the instance of the class
+    }
+
+    greet() {
+        console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+        // 'this' refers to the instance of the class
+    }
+}
+
+const person1 = new Person('Alice', 30);
+person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
+
+
+</script>
+</html>
